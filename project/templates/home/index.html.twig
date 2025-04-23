@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+
+    {{ form(form) }}
+
+
+    <h1>Home</h1>
+
+    <ul>
+        <li><a href="{{ path('product.index') }}">Product</a></li>
+        <li><a href="{{ path('category.index') }}">Categories</a></li>
+    </ul>
+    
+{% endblock %}

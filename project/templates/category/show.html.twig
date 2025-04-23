@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Category {{ category.id }} {% endblock %}
+
+{% block body %}
+
+    <h1>Category {{ category.id }}</h1>
+    <hr>
+    <a href="{{ path('category.index') }}" class="btn btn-primary">Back to list</a>
+    
+
+    <h2>Category Details</h2>
+    <p><strong>Name:</strong> {{ category.name }}</p>
+    <p><strong>Slug:</strong> {{ category.slug }}</p>
+    <p><strong>Created At:</strong> {{ category.createdAt|date('Y-m-d H:i:s') }}</p>
+    <p><strong>Updated At:</strong> {{ category.updatedAt|date('Y-m-d H:i:s') }}</p>
+
+    <a href="{{ path('category.edit', { id: category.id }) }}">Edit</a>
+
+{% endblock %}

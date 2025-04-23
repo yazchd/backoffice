@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+
+    <h1>Product</h1>
+    <div class="d-flex justify-content-start">
+        
+        <div>
+            <a href="{{ path('product.create') }}" class="btn btn-primary">Add Product</a>
+        </div>
+        <div>
+            <a href="{{ path('category.index') }}" class="btn btn-primary">Categories</a>
+        </div>
+        <div>
+            <a href="{{ path('home') }}" class="btn btn-primary">Homepage</a>
+        </div>
+    </div>
+    <hr>
+
+    <table class="table table-striped">     
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody> 
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.category.name | default('No category') }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>
+                        <a href="{{ path('product.show', { id: product.id }) }}" class="btn btn-primary">View</a>
+                        <a href="{{ path('product.edit', { id: product.id }) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ path('product.delete', { id: product.id }) }}" method="POST" style="display: inline-block;">
+                            <input type="hidden" name="_method" value="DELETE"> 
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}    
+        </tbody>
+    </table>
+
+{% endblock %}
