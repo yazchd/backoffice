@@ -5,11 +5,17 @@
 {% block body %}
 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Category {{ category.id }}</h1>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Category {{ category.id }}</h1>
+
+    <a href="{{ path('category.index') }}" class="btn btn-primary btn-icon-split">
+        <span class="icon text-gray-600">
+            <i class="fas fa-arrow-left"></i>
+        </span>
+        <span class="text">Back to Categories</span>
+    </a>
+
     <hr>
-    <a href="{{ path('category.index') }}" class="btn btn-primary">Back to list</a>
-    
 
     <h2>Category Details</h2>
     <p><strong>Name:</strong> {{ category.name }}</p>
@@ -17,6 +23,6 @@
     <p><strong>Created At:</strong> {{ category.createdAt|date('Y-m-d H:i:s') }}</p>
     <p><strong>Updated At:</strong> {{ category.updatedAt|date('Y-m-d H:i:s') }}</p>
 
-    <a href="{{ path('category.edit', { id: category.id }) }}">Edit</a>
+    <a href="{{ path('category.edit', { id: category.id }) }}" class="btn btn-warning">Edit</a>
 </div>
 {% endblock %}

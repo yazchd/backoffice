@@ -7,32 +7,38 @@
 
 <div class="container-fluid">
 
+
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Add Product</h1>
 
+
+    <a href="{{ path('product.index') }}" class="btn btn-primary btn-icon-split">
+        <span class="icon text-gray-600">
+            <i class="fas fa-arrow-left"></i>
+        </span>
+        <span class="text">Back to Products</span>
+    </a>
+
+    <hr>
+
     <div class="row">
         {{ form_start(form) }}
-            <div class="col-md-12">
+            <div class="form-group col-md-12">
                 {{ form_row(form.title) }}
             </div>
-
-            <div class="col-md-12">
+            <div class="form-group col-md-12">
                 {{ form_row(form.category) }}
             </div>
-
-            <div class="col-md-12">
+            <div class="form-group col-md-12">
                 {{ form_row(form.slug) }}
             </div>
-
-            <div class="col-md-12">
+            <div class="form-group col-md-12">
                 {{ form_row(form.description) }}
             </div>
-
-            <div class="col-md-12">
+            <div class="form-group col-md-12">
                 {{ form_row(form.thumbnailFile) }}
             </div>
-
-            <div class="col-md-12" style="text-align: right;">
+            <div class="form-group col-md-12">
                 {{ form_row(form.save) }}
             </div>
         {{ form_end(form) }}

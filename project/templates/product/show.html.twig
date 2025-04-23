@@ -5,25 +5,31 @@
 {% block body %}
 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Product {{ product.id }}</h1>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Product {{ product.id }}</h1>
+
+    <a href="{{ path('product.index') }}" class="btn btn-primary btn-icon-split">
+        <span class="icon text-gray-600">
+            <i class="fas fa-arrow-left"></i>
+        </span>
+        <span class="text">Back to Products</span>
+    </a>
+
     <hr>
-    <a href="{{ path('product.index') }}" class="btn btn-primary">Back to list</a>
-    
+
     <h2>Product Details</h2>
-    
     <div class="row">
         <div class="col-md-6">
             <img src="{{ '/uploads/images/product/' ~ product.thumbnail }}" alt="{{ product.title }}" class="img-fluid">
         </div>
     </div>
-    
     <p><strong>Title:</strong> {{ product.title }}</p>
-    <p><strong>Description:</strong> {{ product.description }}</p>
     <p><strong>Slug:</strong> {{ product.slug }}</p>
+    <p><strong>Category:</strong> {{ product.category.name }}</p>
+    <p><strong>Description:</strong> {{ product.description }}</p>
     <p><strong>Created At:</strong> {{ product.createdAt|date('Y-m-d H:i:s') }}</p>
     <p><strong>Updated At:</strong> {{ product.updatedAt|date('Y-m-d H:i:s') }}</p>
 
-    <a href="{{ path('product.edit', { id: product.id }) }}">Edit</a>
+    <a href="{{ path('product.edit', { id: product.id }) }}" class="btn btn-warning">Edit</a>
 </div>
 {% endblock %}

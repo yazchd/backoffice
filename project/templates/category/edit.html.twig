@@ -5,9 +5,20 @@
 {% block body %}
 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Edition {{ category.id }} - {{ category.name }} </h1>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Edition {{ category.id }} - {{ category.name }} </h1>
 
+
+    <a href="{{ path('category.index') }}" class="btn btn-primary btn-icon-split">
+        <span class="icon text-gray-600">
+            <i class="fas fa-arrow-left"></i>
+        </span>
+        <span class="text">Back to Categories</span>
+    </a>
+
+    <hr>
+                    <!-- Page Heading -->
+        
     <div class="row">
         {{ form_start(form) }}
             <div>
