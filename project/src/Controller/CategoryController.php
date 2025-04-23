@@ -9,7 +9,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 final class CategoryController extends AbstractController
 {
     #[Route('/category', name: 'category.index', methods: ['GET'])]

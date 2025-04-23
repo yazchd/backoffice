@@ -13,13 +13,14 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\User;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
     public function index(Request $request, MailerInterface $mailer, EntityManagerInterface $em, UserPasswordHasherInterface $hasher): Response
     {
-
         // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         // $user = new User();
