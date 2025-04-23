@@ -3,8 +3,10 @@
 {% block title %} Product {{ product.id }} {% endblock %}
 
 {% block body %}
+<div class="container-fluid">
 
-    <h1>Product {{ product.id }}</h1>
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Product {{ product.id }}</h1>
     <hr>
     <a href="{{ path('product.index') }}" class="btn btn-primary">Back to list</a>
     
@@ -23,5 +25,5 @@
     <p><strong>Updated At:</strong> {{ product.updatedAt|date('Y-m-d H:i:s') }}</p>
 
     <a href="{{ path('product.edit', { id: product.id }) }}">Edit</a>
-
+</div>
 {% endblock %}

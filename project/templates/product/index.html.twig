@@ -3,8 +3,10 @@
 {% block title %}Product{% endblock %}
 
 {% block body %}
+<div class="container-fluid">
 
-    <h1>Product</h1>
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Product</h1>
     <div class="d-flex justify-content-start">
         
         <div>
@@ -46,8 +48,12 @@
                         </form>
                     </td>
                 </tr>
+                
             {% endfor %}    
         </tbody>
     </table>
 
+</div>
+
+    
 {% endblock %}

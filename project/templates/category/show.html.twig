@@ -3,8 +3,10 @@
 {% block title %} Category {{ category.id }} {% endblock %}
 
 {% block body %}
+<div class="container-fluid">
 
-    <h1>Category {{ category.id }}</h1>
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Category {{ category.id }}</h1>
     <hr>
     <a href="{{ path('category.index') }}" class="btn btn-primary">Back to list</a>
     
@@ -16,5 +18,5 @@
     <p><strong>Updated At:</strong> {{ category.updatedAt|date('Y-m-d H:i:s') }}</p>
 
     <a href="{{ path('category.edit', { id: category.id }) }}">Edit</a>
-
+</div>
 {% endblock %}

@@ -4,7 +4,10 @@
 
 {% block body %}
 
-    <h1>Edition {{ product.id }} - {{ product.title }} </h1>
+<div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Edition {{ product.id }} - {{ product.title }} </h1>
 
     <div class="row">
         {{ form_start(form) }}
@@ -29,5 +32,6 @@
             </div>
         {{ form_end(form) }}
     </div>
+</div>
 
 {% endblock %}

@@ -25,15 +25,39 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('title' , 
-            TextType::class
+            TextType::class,
+            [
+                'label' => 'Title',
+                'attr' => [
+                    'placeholder' => 'Enter the title of the product',
+                    'class' => 'form-control bg-light border-1 small',
+                ]
+            ]
             )
             ->add('description' , 
-            TextareaType::class
+            TextareaType::class,    
+            [
+                'label' => 'Description',
+                'attr' => [
+                    'placeholder' => 'Enter the description of the product',
+                    'class' => 'form-control bg-light border-1 small',
+                ]
+            ]
             )
-            ->add('slug', TextType::class)
+            ->add('slug', TextType::class,
+            [
+                'label' => 'Slug',
+                'attr' => [
+                    'placeholder' => 'Enter the slug of the product',
+                    'class' => 'form-control bg-light border-1 small',
+                ]
+            ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'form-control bg-light border-1 small',
+                ]
             ])
             ->add('thumbnailFile', FileType::class, [
                 'label' => 'Thumbnail',
@@ -41,11 +65,16 @@ class ProductType extends AbstractType
                 'constraints' => [
                     new Image()
                 ],
+                'attr' => [
+                    'class' => 'form-control bg-light border-1 small',
+                ]
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Save',
-                ],
-            )
+                'attr' => [
+                    'class' => 'btn btn-primary',
+                ]
+            ])
             // ->addEventListener(FormEvents::SUBMIT, $this->listenerFactory->autoSlug('title'))
             // ->addEventListener(FormEvents::PRE_SUBMIT, $this->listenerFactory->timestamp())
             ;
