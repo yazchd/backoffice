@@ -8,7 +8,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Edition {{ product.id }} - {{ product.title }} </h1>
+    <h1 class="h3 mb-4 text-gray-800">Edition {{ product.id }} - {{ product.name }} </h1>
 
 
     <a href="{{ path('product.index') }}" class="btn btn-primary btn-icon-split">
@@ -24,7 +24,7 @@
     <div class="row">
         {{ form_start(form) }}
             <div class="col-md-12">
-                {{ form_row(form.title) }}
+                {{ form_row(form.name) }}
             </div>
             <div class="col-md-12">
                 {{ form_row(form.slug) }}
@@ -33,11 +33,15 @@
                 {{ form_row(form.category) }}
             </div>
             <div class="col-md-12">
+                {{ form_row(form.store) }}
+            </div>
+            <div class="col-md-12">
                 {{ form_row(form.thumbnailFile) }}
             </div>
             <div class="col-md-12">
                 {{ form_row(form.description) }}
             </div>
+
             <div class="col-md-12">
                 {{ form_row(form.save) }}
             </div>

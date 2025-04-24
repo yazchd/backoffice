@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Store;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\PreSubmitEvent;      
@@ -23,6 +25,13 @@ class CategoryType extends AbstractType
         $builder
             ->add('name')
             ->add('slug', TextType::class)
+            ->add('store', EntityType::class, [
+                'class' => Store::class,
+                'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
             ->add('save', SubmitType::class, [
                 'label' => 'Save',
                 'attr' => [

@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Store list{% endblock %}
+
+{% block body %}
+ <!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <h1 class="h3 mb-2 text-gray-800">Stores list</h1>
+
+    <a href="{{ path('store.create') }}" class="btn btn-primary btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-flag"></i>
+        </span>
+        <span class="text">New Store</span>
+    </a>
+
+    <!-- Page Heading -->
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+        For more information about DataTables, please visit the <a target="_blank"
+            href="https://datatables.net">official DataTables documentation</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Categories</th>
+                            <th>Products</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Categories</th>
+                            <th>Products</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        {% for store in stores %}
+                        <tr>
+                            <td>{{store.id}}</td>
+                            <td><a href="{{ path('store.show', { id: store.id }) }}">{{store.name}}</a></td>
+                            <td>{{store.categories | length}}</td>
+                            <td>{{store.products | length}}</td>
+                            <td>{{store.createdAt|date('d-m-Y')}}</td>
+                            <td>{{store.updatedAt|date('d-m-Y')}}</td>
+                            <td>
+                                <a href="{{ path('store.show', { id: store.id }) }}" class="btn btn-circle btn-info"><i class="fas fa-info"></i></a>
+                                <a href="{{ path('store.edit', { id: store.id }) }}" class="btn btn-circle btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                <form action="{{ path('store.delete', { id: store.id }) }}" method="POST" style="display: inline-block;">
+                                    <input type="hidden" name="_method" value="DELETE"> 
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ store.id) }}">
+                                    <button onclick="confirmDelete({{ store.id }})" class="btn btn-circle btn-danger" type="submit"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+{% endblock %}

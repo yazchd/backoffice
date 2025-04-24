@@ -44,52 +44,110 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item {% if app.request.attributes.get('_route') == 'home' %} active {% endif %}">
                 <a class="nav-link" href="{{ path('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+               Stores list
+            </div>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ path('store.show', { 'id': 1 }) }}" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Orimeca</span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">List :</h6>
+                        <a class="collapse-item" href="{{ path('store.show', { 'id': 1 }) }}">Details</a>
+                        <a class="collapse-item" href="{{ path('store.categories', { 'id': 1 }) }}">Categories</a>
+                        <a class="collapse-item" href="{{ path('store.products', { 'id': 1 }) }}">Products</a>
+                        <a class="collapse-item" href="{{ path('store.show', { 'id': 1 }) }}">Orders</a>
+                        <a class="collapse-item" href="{{ path('store.show', { 'id': 1 }) }}">Providers</a>
+
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ path('product.show', { 'id': 2 }) }}" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-leaf"></i>
+                    <span>Bio Cosmetics</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">List:</h6>
+                        <a class="collapse-item" href="{{ path('store.show', { 'id': 2 }) }}">Details</a>
+
+                        <a class="collapse-item" href="{{ path('store.categories', { 'id': 2 }) }}">Categories</a>
+                        <a class="collapse-item" href="{{ path('store.products', { 'id': 2 }) }}">Products</a>
+                        <a class="collapse-item" href="{{ path('store.show', { 'id': 2 }) }}">Orders</a>
+                        <a class="collapse-item" href="{{ path('store.show', { 'id': 2 }) }}">Providers</a>
+                    </div>
+                </div>
+            </li>
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+               Elements list
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ path('product.index') }}" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Products</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="{{ path('product.index') }}">All Products</a>
-                        <a class="collapse-item" href="{{ path('product.create') }}">Create Product</a>
-                    </div>
-                </div>
+            <!-- Nav Item - Stores -->
+            <li class="nav-item {% if app.request.attributes.get('_route') == 'store.index' %} active {% endif %}">
+                <a class="nav-link" href="{{ path('store.index') }}">
+                    <i class="fas fa-fw fa-store"></i>
+                    <span>Stores</span></a>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ path('category.index') }}" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Categories</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="{{ path('category.index') }}">All Categories</a>
-                        <a class="collapse-item" href="{{ path('category.create') }}">Create Category</a>
-                    </div>
-                </div>
+            <!-- Nav Item - Categories -->
+            <li class="nav-item {% if app.request.attributes.get('_route') == 'category.index' %} active {% endif %}">
+                <a class="nav-link" href="{{ path('category.index') }}">
+                    <i class="fas fa-fw fa-list"></i>
+                    <span>Categories</span></a>
             </li>
+            <!-- Nav Item - Products -->
+            <li class="nav-item {% if app.request.attributes.get('_route') == 'product.index' %} active {% endif %}">
+                <a class="nav-link" href="{{ path('product.index') }}">
+                    <i class="fas fa-fw fa-box"></i>
+                    <span>Products</span></a>
+            </li>
+           
+            <!-- Nav Item - Orders -->
+            <li class="nav-item {% if app.request.attributes.get('_route') == 'product.index' %} active {% endif %}">
+                <a class="nav-link" href="">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>Orders</span></a>
+            </li>
+           
+           
+            <!-- Nav Item - Orders -->
+            <li class="nav-item {% if app.request.attributes.get('_route') == 'home' %} active {% endif %}">
+                <a class="nav-link" href="">
+                    <i class="fas fa-fw fa-industry"></i>
+                    <span>Providers</span></a>
+            </li>
+           
+            <!-- Nav Item - Orders -->
+            <li class="nav-item {% if app.request.attributes.get('_route') == 'home' %} active {% endif %}">
+                <a class="nav-link" href="">
+                    <i class="fas fa-fw fa-truck"></i>
+                    <span>Carriers</span></a>
+            </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">

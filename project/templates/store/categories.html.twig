@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category{% endblock %}
+{% block title %}Store {{ store.name }} - Categories list{% endblock %}
 
 {% block body %}
-
-
-<!-- Begin Page Content -->
+ <!-- Begin Page Content -->
 <div class="container-fluid">
-
-    <h1 class="h3 mb-2 text-gray-800">Categories list</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('store.show', { 'id': store.id }) }}">{{ store.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Categories</li>
+        </ol>
+    </nav>
+    <h1 class="h3 mb-2 text-gray-800">{{ store.name }} - Categories list</h1>
 
     <a href="{{ path('category.create') }}" class="btn btn-primary btn-icon-split">
         <span class="icon text-white-50">
@@ -36,5 +39,4 @@
 
 </div>
 <!-- /.container-fluid -->
-
 {% endblock %}

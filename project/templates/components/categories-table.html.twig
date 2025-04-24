@@ -1,0 +1,47 @@
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Store</th>
+                            <th>Products</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Store</th>
+                            <th>Products</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        {% for category in categories %}
+                        <tr>
+                            <td>{{category.id}}</td>
+                            <td><a href="{{ path('category.show', { 'id': category.id }) }}">{{category.name}}</a></td>
+                            <td>{{category.store.name}}</td>
+                            <td>{{category.products | length}}</td>
+                            <td>{{category.createdAt|date('d-m-Y')}}</td>
+                            <td>{{category.updatedAt|date('d-m-Y')}}</td>
+                            <td>
+                                <a href="{{ path('category.show', { id: category.id }) }}" class="btn btn-circle btn-info"><i class="fas fa-info"></i></a>
+                                <a href="{{ path('category.edit', { id: category.id }) }}" class="btn btn-circle btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                <form action="{{ path('category.delete', { id: category.id }) }}" method="POST" style="display: inline-block;">
+                                    <input type="hidden" name="_method" value="DELETE"> 
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+                                    <button onclick="confirmDelete({{ category.id }})" class="btn btn-circle btn-danger" type="submit"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>

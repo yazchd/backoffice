@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Category {{ category.id }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">Category {{ category.id }} - {{ category.name }}</h1>
 
     <a href="{{ path('category.index') }}" class="btn btn-primary btn-icon-split">
         <span class="icon text-gray-600">
@@ -19,10 +19,20 @@
 
     <h2>Category Details</h2>
     <p><strong>Name:</strong> {{ category.name }}</p>
+    <p><strong>Store:</strong> {{ category.store.name }}</p>
     <p><strong>Slug:</strong> {{ category.slug }}</p>
     <p><strong>Created At:</strong> {{ category.createdAt|date('Y-m-d H:i:s') }}</p>
     <p><strong>Updated At:</strong> {{ category.updatedAt|date('Y-m-d H:i:s') }}</p>
 
     <a href="{{ path('category.edit', { id: category.id }) }}" class="btn btn-warning">Edit</a>
+
+    <hr>
+
+    <h2>Products</h2>
+    <ul>
+        {% for product in products %}   
+            <li>{{ product.name }} - <a href="{{ path('product.show', { id: product.id }) }}"><i class="fas fa-eye"></i></a></li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}

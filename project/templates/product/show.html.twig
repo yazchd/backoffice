@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Product {{ product.id }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">Product {{ product.id }} - {{ product.name }}</h1>
 
     <a href="{{ path('product.index') }}" class="btn btn-primary btn-icon-split">
         <span class="icon text-gray-600">
@@ -20,12 +20,13 @@
     <h2>Product Details</h2>
     <div class="row">
         <div class="col-md-6">
-            <img src="{{ '/uploads/images/product/' ~ product.thumbnail }}" alt="{{ product.title }}" class="img-fluid">
+            <img src="{{ '/uploads/images/product/' ~ product.thumbnail }}" alt="{{ product.name }}" class="img-fluid">
         </div>
     </div>
-    <p><strong>Title:</strong> {{ product.title }}</p>
+    <p><strong>Name:</strong> {{ product.name }}</p>
     <p><strong>Slug:</strong> {{ product.slug }}</p>
     <p><strong>Category:</strong> {{ product.category.name }}</p>
+    <p><strong>Store:</strong> {{ product.store.name }}</p>
     <p><strong>Description:</strong> {{ product.description }}</p>
     <p><strong>Created At:</strong> {{ product.createdAt|date('Y-m-d H:i:s') }}</p>
     <p><strong>Updated At:</strong> {{ product.updatedAt|date('Y-m-d H:i:s') }}</p>

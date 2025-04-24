@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
+use App\Entity\Product;
+use App\Form\CategoryType;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Category;
-use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -50,8 +51,10 @@ final class CategoryController extends AbstractController
     public function show(int $id, EntityManagerInterface $em): Response
     {
         $category = $em->getRepository(Category::class)->find($id);
+        $products = $em->getRepository(Product::class)->findBy(['category' => $category]);
         return $this->render('category/show.html.twig', [
             'category' => $category,
+            'products' => $products,
         ]);
     }
 

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Store;
 use App\Form\FormListenerFactory;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -24,12 +25,12 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title' , 
+            ->add('name' , 
             TextType::class,
             [
-                'label' => 'Title',
+                'label' => 'name',
                 'attr' => [
-                    'placeholder' => 'Enter the title of the product',
+                    'placeholder' => 'Enter the name of the product',
                     'class' => 'form-control bg-light border-1 small',
                 ]
             ]
@@ -49,6 +50,13 @@ class ProductType extends AbstractType
                 'label' => 'Slug',
                 'attr' => [
                     'placeholder' => 'Enter the slug of the product',
+                    'class' => 'form-control bg-light border-1 small',
+                ]
+            ])
+            ->add('store', EntityType::class, [
+                'class' => Store::class,
+                'choice_label' => 'name',
+                'attr' => [
                     'class' => 'form-control bg-light border-1 small',
                 ]
             ])
@@ -75,7 +83,7 @@ class ProductType extends AbstractType
                     'class' => 'btn btn-primary',
                 ]
             ])
-            // ->addEventListener(FormEvents::SUBMIT, $this->listenerFactory->autoSlug('title'))
+            // ->addEventListener(FormEvents::SUBMIT, $this->listenerFactory->autoSlug('name'))
             // ->addEventListener(FormEvents::PRE_SUBMIT, $this->listenerFactory->timestamp())
             ;
         ;

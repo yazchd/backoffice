@@ -1,20 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Category Create {% endblock %}
+{% block title %} Store Create {% endblock %}
 
 {% block body %}
+
+
 <div class="container-fluid">
 
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Add Category</h1>
+    <h1 class="h3 mb-4 text-gray-800">Add Store</h1>
 
 
-    <a href="{{ path('category.index') }}" class="btn btn-primary btn-icon-split">
+    <a href="{{ path('store.index') }}" class="btn btn-primary btn-icon-split">
         <span class="icon text-gray-600">
             <i class="fas fa-arrow-left"></i>
         </span>
-        <span class="text">Back to Categories</span>
+        <span class="text">Back to Stores</span>
     </a>
 
     <hr>
@@ -25,10 +27,7 @@
                 {{ form_row(form.name) }}
             </div>
             <div class="form-group col-md-12">
-                {{ form_row(form.slug) }}
-            </div>  
-            <div class="form-group col-md-12">
-                {{ form_row(form.store) }}
+                {{ form_row(form.siteUrl) }}
             </div>
             <div class="form-group col-md-12">
                 {{ form_row(form.save) }}
@@ -36,4 +35,5 @@
         {{ form_end(form) }}
     </div>
 </div>
+
 {% endblock %}

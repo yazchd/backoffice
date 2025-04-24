@@ -1,20 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category{% endblock %}
+{% block title %}Store {{ store.name }} - Products list{% endblock %}
 
 {% block body %}
-
-
-<!-- Begin Page Content -->
+ <!-- Begin Page Content -->
 <div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('store.show', { 'id': store.id }) }}">{{ store.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Products</li>
+        </ol>
+    </nav>
+    <h1 class="h3 mb-2 text-gray-800">{{ store.name }} - Products list</h1>
 
-    <h1 class="h3 mb-2 text-gray-800">Categories list</h1>
 
-    <a href="{{ path('category.create') }}" class="btn btn-primary btn-icon-split">
+
+
+    <a href="{{ path('product.create') }}" class="btn btn-primary btn-icon-split">
         <span class="icon text-white-50">
             <i class="fas fa-flag"></i>
         </span>
-        <span class="text">New Category</span>
+        <span class="text">New Product</span>
     </a>
 
     <!-- Page Heading -->
@@ -29,12 +35,13 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                {% include 'components/categories-table.html.twig' %}
+
+            {% include 'components/products-table.html.twig' %}
+                
             </div>
         </div>
     </div>
 
 </div>
 <!-- /.container-fluid -->
-
 {% endblock %}
