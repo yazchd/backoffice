@@ -36,7 +36,7 @@ final class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->uploadThumbnail($product, $form);
+            $this->uploadThumbnail($product, $form, '/uploads/images/product/');
 
             $product->setCreatedAt(new \DateTimeImmutable());
             $product->setUpdatedAt(new \DateTimeImmutable());
@@ -65,9 +65,9 @@ final class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $product->setUpdatedAt(new \DateTimeImmutable());
 
-            $this->deleteThumbnail($product);
-            
-            $this->uploadThumbnail($product, $form);
+            $this->deleteThumbnail($product, '/uploads/images/product/');
+
+            $this->uploadThumbnail($product, $form, '/uploads/images/product/');
 
             $em->flush();
             $this->addFlash('success', 'Product updated successfully');
@@ -85,8 +85,8 @@ final class ProductController extends AbstractController
     public function delete(int $id, EntityManagerInterface $em): Response
     {
         $product = $em->getRepository(Product::class)->find($id);
-
-        $this->deleteThumbnail($product);
+        
+        $this->deleteThumbnail($product, '/uploads/images/product/');
 
         $em->remove($product);
         $em->flush();
@@ -107,7 +107,7 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    private function uploadThumbnail(Product $product, FormInterface $form): void
+    private function uploadThumbnail(Product $product, FormInterface $form, string $filePath): void
     {
         $thumbnailFile = $form->get('thumbnailFile')->getData();
         if (!$thumbnailFile) {
@@ -117,20 +117,20 @@ final class ProductController extends AbstractController
         $fileName = uniqid().'.'. $thumbnailFile->guessExtension();
 
         $thumbnailFile->move(
-            $this->getParameter('kernel.project_dir') . '/public/uploads/images/product',
+            $this->getParameter('kernel.project_dir') . '/public' . $filePath,
             $fileName
         );
 
-        $product->setThumbnail($fileName);
+        $product->setThumbnail($filePath . $fileName);
     }
 
-    private function deleteThumbnail(Product $product): void
+    private function deleteThumbnail(Product $product, string $filePath): void
     {
         $thumbnail = $product->getThumbnail();
 
         // dd($thumbnail, $this->getParameter('kernel.project_dir') . '/public/uploads/images/product/' . $thumbnail);
         if ($thumbnail) {
-            unlink($this->getParameter('kernel.project_dir') . '/public/uploads/images/product/' . $thumbnail);
+            unlink($this->getParameter('kernel.project_dir') . '/public' . $thumbnail);
         }
     }
 }
