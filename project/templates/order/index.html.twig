@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block body %}
+ <!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <h1 class="h3 mb-2 text-gray-800">Orders list</h1>
+
+    <a href="{{ path('order.create') }}" class="btn btn-primary btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-flag"></i>
+        </span>
+        <span class="text">New Order</span>
+    </a>
+
+    <!-- Page Heading -->
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+        For more information about DataTables, please visit the <a target="_blank"
+            href="https://datatables.net">official DataTables documentation</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Orders list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                {% include 'components/orders-table.html.twig' %}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

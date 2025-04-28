@@ -1,0 +1,56 @@
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Track ID</th>
+                            <th>Customer</th>
+                            <th>Store</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Track ID</th>
+                            <th>Customer</th>
+                            <th>Store</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td>{{order.trackId}}</td>
+                            <td>{{order.description}}</td>
+                            <td>{{order.store.name}}</td>
+                            <td>{{order.amount}}</td>
+                            <td>{{order.status}}</td>
+                            <td>{{order.details}}</td>
+                            <td>{{order.createdAt|date('d-m-Y')}}</td>
+                            <td>{{order.updatedAt|date('d-m-Y')}}</td>
+                            <td>
+                                <a href="{{ path('order.show', { id: order.id }) }}" class="btn btn-circle btn-info"><i class="fas fa-info"></i></a>
+                                <a href="{{ path('order.edit', { id: order.id }) }}" class="btn btn-circle btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                <form action="{{ path('order.delete', { id: order.id }) }}" method="POST" style="display: inline-block;">
+                                    <input type="hidden" name="_method" value="DELETE"> 
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ order.id) }}">
+                                    <button onclick="confirmDelete({{ order.id }})" class="btn btn-circle btn-danger" type="submit"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>

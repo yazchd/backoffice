@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\Store;
 use Doctrine\ORM\EntityManagerInterface;
@@ -161,6 +162,42 @@ final class OrimecaController extends AbstractController
         ];
         $data = $serializer->serialize($products, JsonEncoder::FORMAT, $context);
         return new JsonResponse($data, Response::HTTP_OK, [], true);
+    }
+
+    #[Route('/api/orimeca/post/order', name: 'api_post_order', methods: ['POST'])]
+    public function postOrder(SerializerInterface $serializer, Request $request): JsonResponse
+    {
+        parse_str($request->getContent(), $data);
+
+        $uniq = strtoupper(substr(uniqid(), -4));
+
+        // Création d'un objet DateTime et formatage de la date
+        $date = (new \DateTime())->format('ymd');
+        
+        // Concaténation pour créer l'identifiant
+        $trackId = $date .'-'.$uniq;
+
+
+        try {
+            $order = new Order();
+            $order->setTrackId($trackId);
+            $order->setDescription($data['description']);
+            $order->setDetails($data['details']);
+            $order->setAmount($data['amount']);
+            $order->setStatus('confirmed');
+            $order->setCreatedAt(new \DateTimeImmutable());
+            $order->setUpdatedAt(new \DateTimeImmutable());
+            $order->setStore($this->store);
+            $this->entityManager->persist($order);
+            $this->entityManager->flush();
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Erreur commande non créée', 'type' => 'error', 'error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+        }
+
+        if ($order) {
+            return new JsonResponse(['message' => 'Votre commande a été créée avec succès', 'type' => 'success', 'trackId' => $order->getTrackId()], Response::HTTP_OK);
+        } 
+        return new JsonResponse(['message' => 'Nous sommes désolés ! votre commande n\'a pas été créée !', 'type' => 'error'], Response::HTTP_BAD_REQUEST);
     }
 
 }

@@ -127,12 +127,11 @@
             </li>
            
             <!-- Nav Item - Orders -->
-            <li class="nav-item {% if app.request.attributes.get('_route') == 'product.index' %} active {% endif %}">
-                <a class="nav-link" href="">
+            <li class="nav-item {% if app.request.attributes.get('_route') == 'order.index' %} active {% endif %}">
+                <a class="nav-link" href="{{ path('order.index') }}">
                     <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>Orders</span></a>
             </li>
-           
            
             <!-- Nav Item - Orders -->
             <li class="nav-item {% if app.request.attributes.get('_route') == 'home' %} active {% endif %}">
