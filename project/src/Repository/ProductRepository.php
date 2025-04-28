@@ -40,26 +40,26 @@ class ProductRepository extends ServiceEntityRepository
      * 
      * @param int $productId L'identifiant du produit
      * @param int $storeId L'identifiant du magasin
-     * @return Product|null Le produit trouvé ou null si aucun produit ne correspond
+     * @return array|null Le produit trouvé ou null si aucun produit ne correspond
      */
-    public function findOneProductByStoreId(int $productId, int $storeId): ?Product
+    public function findOneProductByStoreId(int $productId, int $storeId): ?array
     {
         return $this->createQueryBuilder('p')
-            ->select('p.id', 'p.name', 'p.slug', 'p.description', 'p.thumbnail', 'p.price', 'c.name as categoryName')
+            ->select('p.id', 'p.name', 'p.slug', 'p.description', 'p.thumbnail', 'p.price', 'c.name as categoryName', 'c.id as categoryId')
             ->leftJoin('p.category', 'c')
             ->andWhere('p.id = :productId')
             ->andWhere('p.store = :storeId')
             ->setParameter('productId', $productId)
             ->setParameter('storeId', $storeId)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getOneOrNullResult()  
         ;
     }
 
     public function findProductsByCategoryId(int $categoryId): array
     {
         return $this->createQueryBuilder('p')
-            ->select('p.id', 'p.name', 'p.slug', 'p.description', 'p.thumbnail', 'p.price', 'c.name as categoryName')
+            ->select('p.id', 'p.name', 'p.slug', 'p.description', 'p.thumbnail', 'p.price', 'c.name as categoryName', 'c.id as categoryId')
             ->leftJoin('p.category', 'c')
             ->andWhere('p.category = :categoryId')
             ->setParameter('categoryId', $categoryId)
@@ -69,7 +69,7 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findOneProductByCategoryId(int $productId, int $categoryId): ?Product
+    public function findOneProductByCategoryId(int $productId, int $categoryId): ?array
     {
         return $this->createQueryBuilder('p')
             ->select('p.id', 'p.name', 'p.slug', 'p.description', 'p.thumbnail', 'p.price', 'c.name as categoryName')
@@ -80,6 +80,20 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('categoryId', $categoryId)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    public function findTopProductsByStoreId(int $storeId, int $limit): array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p.id', 'p.name', 'p.slug', 'p.description', 'p.thumbnail', 'p.price', 'c.name as categoryName')
+            ->leftJoin('p.category', 'c')
+            ->andWhere('p.store = :storeId')
+            ->setParameter('storeId', $storeId)
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
         ;
     }
     

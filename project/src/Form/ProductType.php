@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
@@ -63,6 +64,18 @@ class ProductType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'form-control bg-light border-1 small',
+                ]
+            ])
+            ->add('price', NumberType::class, [
+                'label' => 'Price',
+                'attr' => [
+                    'class' => 'form-control bg-light border-1 small',
+                ]
+            ])
+            ->add('quantity', NumberType::class, [
+                'label' => 'Quantity',
                 'attr' => [
                     'class' => 'form-control bg-light border-1 small',
                 ]
